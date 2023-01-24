@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "759664826644",
+    "project_id": "data-base-7bdd5",
+    "storage_bucket": "data-base-7bdd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759664826644:android:78fbbbb27019488d57ca01",
+        "android_client_info": {
+          "package_name": "com.example.vechatooo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759664826644-qndldg6ava72ib97c2ssf9lmu8j70f27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGU0G4vQm_PJY_sXeXjSeNwqK1XP4E3Is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759664826644-qndldg6ava72ib97c2ssf9lmu8j70f27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
