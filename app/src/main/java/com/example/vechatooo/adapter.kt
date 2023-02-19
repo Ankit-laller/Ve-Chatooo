@@ -33,7 +33,7 @@ class adapter(val context: Context,private val userList:ArrayList<Users>)
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("name",current.name)
-            intent.putExtra("userId", current.userId)
+            intent.putExtra("userId", current.uid)
             context.startActivity(intent)
         }
     }

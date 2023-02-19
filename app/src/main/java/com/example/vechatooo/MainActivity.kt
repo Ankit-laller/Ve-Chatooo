@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         var intent = Intent(this, HomePage::class.java)
-                        finish()
+
                         startActivity(intent)
                         finish()
                     }else{

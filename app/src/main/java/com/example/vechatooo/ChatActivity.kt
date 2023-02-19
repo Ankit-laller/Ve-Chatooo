@@ -32,17 +32,17 @@ class ChatActivity : AppCompatActivity() {
         msgTv = findViewById(R.id.msgEt)
         sendBtn = findViewById(R.id.sendBtn)
 
-        val senderId = FirebaseAuth.getInstance().currentUser?.email
+        val senderId = FirebaseAuth.getInstance().currentUser?.uid
         dbref = FirebaseDatabase.getInstance().getReference()
         senderRoom = receiverId + senderId
-        receiverRoom= senderRoom + receiverId
+        receiverRoom= senderId + receiverId
 
         msgList = ArrayList()
         mAdapter = msgAdapter(this, msgList)
         msgRecyclerView.layoutManager = LinearLayoutManager(this)
         msgRecyclerView.adapter = mAdapter
 
-        dbref.child("Chats").child("sender")
+        dbref.child("Chatss").child(senderRoom!!).child("messages")
             .addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     msgList.clear()
@@ -65,12 +65,12 @@ class ChatActivity : AppCompatActivity() {
 
             val msg = msgTv.text.toString()
             val msgObject = Message(msg,senderId)
-            val userId =dbref.push().key!!
-            dbref.child("Chats").child("sender").child(userId)
+
+            dbref.child("Chatss").child(senderRoom!!).child("messages").push()
                 .setValue(msgObject).addOnSuccessListener {
-                    dbref.child("Chats").child("receiver").push()
+                    dbref.child("Chatss").child(receiverRoom!!).child("messages").push()
                         .setValue(msgObject).addOnCanceledListener {
-                            Toast.makeText(this,"msg sent:)", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"msg not sent:)", Toast.LENGTH_SHORT).show()
                         }.addOnFailureListener {err->
                             Toast.makeText(this,"Error ${err.message}", Toast.LENGTH_SHORT).show()
                         }

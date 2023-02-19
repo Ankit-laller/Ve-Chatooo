@@ -41,7 +41,7 @@ class msgAdapter(val context: Context, val msgList:ArrayList<Message>):RecyclerV
 
     override fun getItemViewType(position: Int): Int {
         val currentMsg = msgList[position]
-        if(FirebaseAuth.getInstance().currentUser?.email.equals(currentMsg.senderId)){
+        if(FirebaseAuth.getInstance().currentUser?.uid.equals(currentMsg.senderId)){
             return itemSent
         }else{
             return itemReceive

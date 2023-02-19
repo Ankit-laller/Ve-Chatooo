@@ -64,7 +64,7 @@ class HomePage : AppCompatActivity() {
                     for (snaps in snapshot.children){
                         Log.d("BCCCCC","$snaps")
                         var userData = snaps.getValue(Users::class.java)
-                        if(firebaseAuth?.currentUser?.email !=userData?.userId ){
+                        if(firebaseAuth?.currentUser?.email !=userData?.email ){
                             userList.add(userData!!)
                         }
                         userRecyclerView.adapter = mAdapter

@@ -52,7 +52,7 @@ class SignUp : AppCompatActivity(){
 //                            val editor = sharedPreferences.edit()
 //                            editor.putString("username", name)
 //                            editor.commit()
-                            insertData(email, pass,name)
+                            insertData(name, email,pass,firebaseAuth.uid)
                             val intent = Intent(this, MainActivity::class.java)
                             finish()
                             startActivity(intent)
@@ -69,10 +69,10 @@ class SignUp : AppCompatActivity(){
             Toast.makeText(this, "Don't leave anything empty", Toast.LENGTH_SHORT).show()
         }
     }
-    fun insertData(user:String?, pass:String?,name:String?){
-        val userId =dbRef.push().key!!
-        var userData =Users(user,pass,name)
-        dbRef.child(userId).setValue(userData).addOnCompleteListener{
+    fun insertData(name:String?, email:String?,pass:String?, uid:String?){
+
+        var userData =Users(name,email,pass,uid)
+        dbRef.child(uid!!).setValue(userData).addOnCompleteListener{
             Toast.makeText(this,"Done:)",Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {err->
             Toast.makeText(this,"Error ${err.message}", Toast.LENGTH_SHORT).show()
