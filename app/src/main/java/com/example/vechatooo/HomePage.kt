@@ -26,6 +26,7 @@ class HomePage : AppCompatActivity() {
     private lateinit var userName :Array<String>
     private lateinit var userPass :Array<String>
     private lateinit var mAdapter: adapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
@@ -54,7 +55,10 @@ class HomePage : AppCompatActivity() {
 //        }
 //
 
+
     }
+
+
     private fun getUserList() {
         dbref = FirebaseDatabase.getInstance().getReference("User")
         dbref.addValueEventListener(object :ValueEventListener{
@@ -85,10 +89,15 @@ class HomePage : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId ==R.id.logoutBtn){
+            var sharedPreferences = getSharedPreferences("App", Context.MODE_PRIVATE)
+            var editor = sharedPreferences.edit()
+            editor.putString("login"," ")
+            editor.apply()
             firebaseAuth.signOut()
             val intent = Intent(this, MainActivity::class.java)
-            finish()
             startActivity(intent)
+
+            finish()
             return true
         }
         return true

@@ -29,12 +29,7 @@ class SignUp : AppCompatActivity(){
             val pass = binding.etpass.text.toString()
             val pass2 = binding.etpass2.text.toString()
             val name = binding.etName.text.toString()
-//            sharedPreferences = getSharedPreferences("username", Context.MODE_PRIVATE)
-//
-//            if(sharedPreferences.getString("username"," ")!=" "){
-//                val intent = Intent(this, HomePage::class.java)
-//                startActivity(intent)
-//            }
+
 
             loginFunction(email, pass, name,pass2)
 
@@ -49,13 +44,10 @@ class SignUp : AppCompatActivity(){
                 if(pass.length>5){
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if(it.isSuccessful){
-//                            val editor = sharedPreferences.edit()
-//                            editor.putString("username", name)
-//                            editor.commit()
                             insertData(name, email,pass,firebaseAuth.uid)
                             val intent = Intent(this, MainActivity::class.java)
-                            finish()
                             startActivity(intent)
+                            finish()
                         }else{
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                             print(it.exception.toString())

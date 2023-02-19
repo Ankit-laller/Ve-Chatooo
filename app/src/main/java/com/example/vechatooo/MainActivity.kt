@@ -1,5 +1,6 @@
 package com.example.vechatooo
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener {
             val intent = Intent(this,SignUp::class.java )
             startActivity(intent)
+            finish()
         }
+        check()
 
         firebaseAuth = FirebaseAuth.getInstance()
         binding.Loginbutton.setOnClickListener{
@@ -31,7 +34,10 @@ class MainActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                     if(it.isSuccessful){
                         var intent = Intent(this, HomePage::class.java)
-
+                         var sharedPreferences = getSharedPreferences("App", Context.MODE_PRIVATE)
+                        var editor = sharedPreferences.edit()
+                        editor.putString("login","true")
+                        editor.apply()
                         startActivity(intent)
                         finish()
                     }else{
@@ -44,5 +50,14 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Can not live blank email or password", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun check(){
+         var sharedPreferences = getSharedPreferences("App", Context.MODE_PRIVATE)
+        var check = sharedPreferences.getString("login","")
+        if(check.equals("true")){
+            startActivity(Intent(this,HomePage::class.java))
+            finish()
+        }
+
     }
 }
